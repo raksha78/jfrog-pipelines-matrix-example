@@ -1,5 +1,5 @@
 pipelines:
-  - name: S-Matrix-0033
+  - name: S_Matrix_0033
     steps:
       - name: set_up
         type: PreMatrix
