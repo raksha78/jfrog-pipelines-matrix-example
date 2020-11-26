@@ -11,6 +11,9 @@ pipelines:
       - name: matrix_3e_2r_example
         type: Matrix
         stepMode: Bash
+        configuration:
+          inputSteps:
+            - name: set_up
         stepletMultipliers:
           environmentVariables:
             - animal: dog
