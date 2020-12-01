@@ -1,0 +1,55 @@
+pipelines:
+  - name: <string>
+    steps:
+      - name: <string>
+        type: Matrix
+        stepMode: Bash
+        configuration:
+          #inherits from Bash
+          multiNode: <boolean>        # optional, only needed if steplets
+                                      # need to execute on separate nodes
+ 
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onExecute:                        # required    
+            - echo "Executing steplet $step_name"
+            - echo "env1 = $env1"
+            - echo "env2 = $env2"
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete: #always
+            - echo "Cleaning up some stuff"
+ 
+        stepletMultipliers:
+          environmentVariables:       # optional, only needed if user
+            - env1: one               # wants to execute step against
+              env2: two               # multiple values of env
+            - env1: abc               
+              env2: xyz
+ 
+          runtimes:                   # optional, only needed if user
+            - type: image             # wants to execute step against
+              image:                  # multiple images
+                auto:                
+                  language:
+                  version:
+                custom:
+                  <same config as Bash>
+            - image:              
+                auto:
+                  language:
+                  version:
+                custom:
+                  <same config as Bash>
+ 
+                
+ 
+          exclude:                   # optional, array of combinations
+            - nodePool:              # that are not executed 
+              environmentVariables:
+                env1: one
+                env2: two
+              runtime: 
