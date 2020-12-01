@@ -1,6 +1,6 @@
 pipelines:
-  - name: S_Matrix_0033
-   steps:
+  - name: S-Matrix-0033
+    steps:
       - name: matrix_3e_2r_example
         type: Matrix
         stepMode: Bash
