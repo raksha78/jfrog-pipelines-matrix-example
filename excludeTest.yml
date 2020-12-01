@@ -24,14 +24,12 @@ pipelines:
                 auto:                
                   language: node
                   version: 12
-                custom:
-                  <same config as Bash>
+                
             - image:              
                 auto:
                   language: node
                   version: 8.17.0  
-                custom:
-                  <same config as Bash>
+                
              
  
           exclude:                   # optional, array of combinations
