@@ -1,0 +1,42 @@
+pipelines:
+  - name: excludePipe
+    steps:
+      - name: step_1
+        type: Matrix
+        stepMode: Bash
+        execution:
+          onExecute:                        # required    
+            - echo "Executing steplet $step_name"
+            - echo "env1 = $env1"
+            - echo "env2 = $env2"
+          
+ 
+        stepletMultipliers:
+          environmentVariables:       # optional, only needed if user
+            - env1: one               # wants to execute step against
+              env2: two               # multiple values of env
+            - env1: abc               
+              env2: xyz
+ 
+          runtimes:                   # optional, only needed if user
+            - type: image             # wants to execute step against
+              image:                  # multiple images
+                auto:                
+                  language: node
+                  version: 12
+                custom:
+                  <same config as Bash>
+            - image:              
+                auto:
+                  language: node
+                  version: 8.17.0  
+                custom:
+                  <same config as Bash>
+             
+ 
+          exclude:                   # optional, array of combinations
+            - nodePool:              # that are not executed 
+              environmentVariables:
+                env1: one
+                env2: two
+              runtime: 
